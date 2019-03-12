@@ -5,7 +5,7 @@
 
 std::wstring GetEditText(HWND hdlg)
 {
-	TCHAR buf[NAME_LIMIT + 1];
+	wchar_t buf[NAME_LIMIT + 1];
 	WORD length = (WORD)SendDlgItemMessage(hdlg, IDC_EDIT1, EM_LINELENGTH, 0, 0);
 	*(WORD*)buf = length;
 	SendDlgItemMessage(hdlg, IDC_EDIT1, EM_GETLINE, 0, (LPARAM)buf);

@@ -10,7 +10,7 @@ struct DiskRep
 	DWORD PelsHeight;
 	DWORD DisplayFlags;
 	DWORD DisplayFrequency;
-	TCHAR Name[NAME_LIMIT + 1];
+	wchar_t Name[NAME_LIMIT + 1];
 };
 
 
