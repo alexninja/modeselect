@@ -18,8 +18,8 @@ struct DiskRep
 
 PCTSTR FileName()
 {
-	static TCHAR buf[MAX_PATH + 100];
-	static PTSTR result = NULL;
+	static wchar_t buf[MAX_PATH + 100];
+	static wchar_t const* result = NULL;
 
 	if (result == NULL)
 	{

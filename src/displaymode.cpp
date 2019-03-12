@@ -81,8 +81,8 @@ bool DisplayMode::operator < (const DisplayMode& rhs)
 
 std::wstring DisplayMode::GetTemporaryName()
 {
-	static TCHAR buf[100];
-	_stprintf(buf, L"%dx%dx%d (%dHz)",
+	wchar_t buf[100];
+	_stprintf_s(buf, L"%dx%dx%d (%dHz)",
 		PelsWidth,
 		PelsHeight,
 		BitsPerPel,
