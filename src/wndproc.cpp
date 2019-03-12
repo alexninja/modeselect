@@ -67,12 +67,12 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (lParam == WM_RBUTTONUP)
 		{
 			POINT mouse;
-			GetCursorPos(&mouse);
-			SetForegroundWindow(g_hwnd); //Q135788
+			::GetCursorPos(&mouse);
+			::SetForegroundWindow(g_hwnd); //Q135788
 
 			HMENU popup = MakeMenu();
-			TrackPopupMenu(popup, 0, mouse.x, mouse.y, 0, g_hwnd, NULL);
-			DestroyMenu(popup);
+			::TrackPopupMenu(popup, 0, mouse.x, mouse.y, 0, g_hwnd, NULL);
+			::DestroyMenu(popup);
 		}
 		break;
 
@@ -81,7 +81,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		switch (LOWORD(wParam))
 		{
 		case ID_EXIT:
-			PostQuitMessage(0);
+			::PostQuitMessage(0);
 			break;
 
 		case ID_SAVEAS:
@@ -91,7 +91,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			g_name = dm.GetTemporaryName();
 
 			INT_PTR res =
-				DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), g_hwnd, DlgProc);
+				::DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), g_hwnd, DlgProc);
 
 			if (res) {
 				dm.SetName(g_name);
@@ -122,12 +122,12 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (item_index >= 0 && item_index < g_modes.size())
 		{
 			POINT mouse;
-			GetCursorPos(&mouse);
+			::GetCursorPos(&mouse);
 
-			HMENU menu = LoadMenu(g_hInstance, MAKEINTRESOURCE(IDR_MENU2));
-			HMENU popup = GetSubMenu(menu, 0);
+			HMENU menu = ::LoadMenu(g_hInstance, MAKEINTRESOURCE(IDR_MENU2));
+			HMENU popup = ::GetSubMenu(menu, 0);
 
-			if (TrackPopupMenu(popup, TPM_RECURSE | TPM_RETURNCMD,
+			if (::TrackPopupMenu(popup, TPM_RECURSE | TPM_RETURNCMD,
 				mouse.x, mouse.y, 0, g_hwnd, NULL) == ID_DELETE)
 			{
 				if (item_index >= 0 && item_index < g_modes.size())
@@ -136,11 +136,11 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 					Save();
 					g_trayicon.UpdateTip();
 					// fake ESC keypress, otherwise TrackPopupMenu stays on screen
-					PostMessage(g_hwnd, WM_KEYDOWN, 0x1B, 0);
+					::PostMessage(g_hwnd, WM_KEYDOWN, 0x1B, 0);
 				}
 			}
 
-			DestroyMenu(menu);
+			::DestroyMenu(menu);
 		}
 	}
 	break;
@@ -157,7 +157,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			g_trayicon.Add();
 		}
 
-		return DefWindowProc(hwnd, message, wParam, lParam);
+		return ::DefWindowProc(hwnd, message, wParam, lParam);
 	}
 
 	return 0;
