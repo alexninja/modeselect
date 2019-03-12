@@ -1,0 +1,53 @@
+#include "resource.h"
+#include <winresrc.h>
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Exit",                        ID_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&Save current mode as...",    ID_SAVEAS
+    END
+END
+
+IDR_MENU2 MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "&Delete",                     ID_DELETE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "display.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 450, 350, 186, 47
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Save mode as:"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,26,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Cancel",IDCANCEL,129,26,50,14,NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT1,7,7,172,12,ES_AUTOHSCROLL | WS_GROUP
+END
+
